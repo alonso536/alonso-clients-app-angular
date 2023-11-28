@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 col-12">
+        <h2 class="my-3">{{ title }}</h2>
+        <div class="card">
+            <div class="card-header">{{ title }}</div>
+            <div class="card-body">
+                <auth-register-form></auth-register-form>
+                <a class="link-offset-2 link-underline link-underline-opacity-0" [routerLink]="['/auth/login']">Ya tienes cuenta? Inicia sesión</a>
+            </div>        
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>

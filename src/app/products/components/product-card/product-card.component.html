@@ -1,0 +1,16 @@
+<div class="card my-3">
+  <img *ngIf="!product.image" [src]="'http://localhost:8080/api/products/upload/no-image.png'" class="card-img-top" [alt]="product.name">
+  <img *ngIf="product.image" [src]="'http://localhost:8080/api/products/upload/' + product.image" class="card-img-top" [alt]="product.name">
+    <div class="card-body">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <h6 class="card-subtitle mb-2 text-body-secondary">Sku: {{ product.sku }}</h6>
+      <p class="card-text">Precio: ${{ product.price }}</p>
+      <p class="card-text">{{ product.description }}</p>
+      <p class="card-text"><small class="text-body-secondary">Stock: {{ product.stock }}</small></p>
+      <button *ngIf="user!.admin" (click)="sendId()" type="button" class="btn btn-primary bg-gradient my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Subir imagen
+      </button>
+      <button *ngIf="user!.admin" class="btn btn-success mx-2">Editar</button>
+      <button *ngIf="user!.admin" (click)="delete(product.id)" class="btn btn-danger">Borrar</button>
+    </div>
+  </div>

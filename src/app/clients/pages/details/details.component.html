@@ -1,0 +1,37 @@
+<div *ngIf="client">
+    <h2 class="my-3">{{ client.name }} {{ client.lastname }}</h2>
+    <button *ngIf="user?.admin" class="btn btn-primary btn-lg" [routerLink]="['/clients/invoice/create', client.id]">Agregar factura</button>
+<div class="card my-3">
+    <div class="card-header">
+        {{ title }}
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 col-12">
+                    <img [src]="client.image ? 'http://localhost:8080/api/clients/upload/' + client.image : 'http://localhost:8080/api/clients/upload/no-image.png'" alt="imagen del cliente" class="img-thumbnail rounded">
+                    <form-image [id]="client.id" (client)="getNewClient($event)"></form-image>
+                </div>
+                <div class="col-sm-9 col-12">
+                    <ul class="list-group">
+                        <li class="list-group-item">Nombre: {{ client.name }} {{ client.lastname }}</li>
+                        <li class="list-group-item">Email: {{ client.email }}</li>
+                        <li class="list-group-item">Teléfono: {{ client.phone }}</li>
+                        <li class="list-group-item">Fecha de nacimiento: {{ client.birthdate | date:'dd-MMM-yyyy' }}</li>
+                    </ul>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h2 class="my-3">Facturas de {{ client.name + ' ' + client.lastname}}</h2>
+                    <table-invoices *ngIf="client.invoices?.length != 0; else noInvoices" [invoices]="client.invoices" [user]="user"></table-invoices>
+                    <ng-template #noInvoices>
+                        <div class="alert alert-info py-3">El cliente no tiene facturas asignadas</div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

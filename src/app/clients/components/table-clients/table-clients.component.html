@@ -1,0 +1,32 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Avatar</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Región</th>
+            <th>Fecha de nacimiento</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let client of clients">
+            <td>{{ client.id }}</td>
+            <td><img [src]="client.image ? 'http://localhost:8080/api/clients/upload/' + client.image : 'http://localhost:8080/api/clients/upload/no-image.png'" alt="imagen del cliente" class="rounded" style="width: 36px; height: 36px"></td>
+            <td>{{ client.name }}</td>
+            <td>{{ client.lastname }}</td>
+            <td>{{ client.email }}</td>
+            <td>{{ client.phone }}</td>
+            <td>{{ client.region?.name }}</td>
+            <td>{{ client.birthdate | date:'dd-MMM-yyyy' }}</td>
+            <td>
+                <button class="btn btn-primary btn-sm bg-gradient" [routerLink]="['/clients/show', client.id]">Ver</button>
+                <button *ngIf="user!.admin" class="btn btn-success btn-sm bg-gradient mx-1" [routerLink]="['/clients/edit', client.id]">Editar</button>
+                <button *ngIf="user!.admin" class="btn btn-danger btn-sm bg-gradient" (click)="delete(client)">Borrar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

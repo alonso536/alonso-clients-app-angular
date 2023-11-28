@@ -1,0 +1,11 @@
+<div class="row">
+    <h2 class="my-3">{{ title }}</h2>
+    <div>
+        <button *ngIf="user?.admin" class="btn btn-primary btn-lg" [routerLink]="['/products/create']">Agregar producto</button>
+    </div>
+    <div *ngFor="let product of products" class="col-md-4 col-sm-6 col-12">
+        <products-product-card [user]="user" [product]="product" (id)="saveId($event)"></products-product-card>
+    </div>
+    <products-form-image [id]="id"></products-form-image>
+    <products-product-paginator *ngIf="paginator" [paginator]="paginator"></products-product-paginator>
+</div>

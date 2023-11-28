@@ -1,0 +1,16 @@
+<form #loginForm="ngForm">
+    <div class="mb-3">
+        <label for="username" class="form-label">Nombre de Usuario</label>
+        <input type="text" class="form-control"  name="username" id="username" [(ngModel)]="username">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" name="password" id="password" [(ngModel)]="password">
+    </div>
+    <div *ngIf="!isValid" class="form-text text-danger">
+        <p>Datos incorrectos</p>
+    </div>
+    <div class="mb-3">
+        <button (click)="login()" class="btn btn-primary bg-gradient">Iniciar sesión</button>    
+    </div>
+</form>

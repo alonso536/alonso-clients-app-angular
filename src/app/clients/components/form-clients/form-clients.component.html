@@ -1,0 +1,57 @@
+<form #clientForm="ngForm">
+    <div class="mb-3">
+        <label for="name" class="form-label">Nombre</label>
+        <input type="text" class="form-control" [(ngModel)]="client.name" name="name" id="name" required minlength="3" #name="ngModel">
+        <div class="form-text text-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+            <p *ngIf="name.errors?.['required']">El nombre es obligatorio</p>
+            <p *ngIf="name.errors?.['minlength']">El nombre debe mínimo 3 caracteres</p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="lastname" class="form-label">Apellido</label>
+        <input type="text" class="form-control" [(ngModel)]="client.lastname" name="lastname" id="lastname" required minlength="3" #lastname="ngModel">
+        <div class="form-text text-danger" *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">
+            <p *ngIf="lastname.errors?.['required']">El apellido es obligatorio</p>
+            <p *ngIf="lastname.errors?.['minlength']">El apellido debe mínimo 3 caracteres</p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" [(ngModel)]="client.email" name="email" id="email" required email #email="ngModel">
+        <div class="form-text text-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+            <p *ngIf="email.errors?.['required']">El email es obligatorio</p>
+            <p *ngIf="email.errors?.['email']">El email debe estar en un formato correcto</p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="phone" class="form-label">Teléfono</label>
+        <input type="number" class="form-control" [(ngModel)]="client.phone" name="phone" id="phone" required #phone="ngModel">
+        <div class="form-text text-danger" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+            <p *ngIf="phone.errors?.['required']">El teléfono es obligatorio</p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="birthdate" class="form-label">Fecha de nacimiento</label>
+        <input type="date" class="form-control" [(ngModel)]="client.birthdate" name="birthdate" id="birthdate" required minlength="3" #birthdate="ngModel">
+        <div class="form-text text-danger" *ngIf="birthdate.invalid && (birthdate.dirty || birthdate.touched)">
+            <p *ngIf="birthdate.errors?.['required']">La fecha de nacimiento es obligatoria</p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="region" class="form-label">Región</label>
+        <select [compareWith]="compareRegion" class="form-select" [(ngModel)]="client.region" name="region" id="region" required region #region="ngModel">
+            <option [ngValue]="undefined">Seleccione una región</option>
+            <option *ngFor="let region of regions" [ngValue]="region">{{ region.name }}</option>
+        </select>
+        <div class="form-text text-danger" *ngIf="region.invalid && (region.dirty || region.touched)">
+            <p *ngIf="region.errors?.['required']">La región es obligatoria</p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <button *ngIf="client.id == 0 else elseBlock" class="btn btn-primary bg-gradient" (click)="store()" [disabled]="!clientForm.form.valid">Enviar</button>    
+        <ng-template #elseBlock>
+            <button class="btn btn-primary bg-gradient" (click)="update()" [disabled]="!clientForm.form.valid">Editar</button>
+        </ng-template>
+    </div>
+</form>
+

@@ -25,3 +25,11 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## TODO
+
+- Habilitar la ruta de editar productos
+- Debe hacerse tanto desde el frontend como del backend
+- Proteger las rutas
+- No mostrar en la paginación los productos que se encuentren eliminados
+- Descontar el stock de los productos según la cantidad ingresada en la factura

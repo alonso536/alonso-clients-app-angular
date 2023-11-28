@@ -1,0 +1,16 @@
+<h2 class="my-3">{{ title }}</h2>
+<div *ngIf="clients.length > 0; else divAlert" class="card">
+    <div class="card-header">
+      {{ title }}
+    </div>
+    <div class="card-body">
+        <table-clients [user]="user" [clients]="clients"></table-clients>
+        <paginator-clients *ngIf="paginator" [paginator]="paginator"></paginator-clients>
+    </div>
+</div>
+
+<ng-template #divAlert>
+  <div class="alert alert-info">
+      <p>No hay clientes registrados</p>
+  </div>
+</ng-template>

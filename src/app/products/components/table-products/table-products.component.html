@@ -1,0 +1,24 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Imagen</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+            <th *ngIf="!disabled">Borrar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of items">
+            <td>{{ item.product.id }}</td>
+            <td><img [src]="item.product.image ? 'http://localhost:8080/api/products/upload/' + item.product.image : 'http://localhost:8080/api/products/upload/no-image.png'" alt="imagen del producto" class="rounded" style="width: 36px; height: 36px"></td>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.product.price }}</td>
+            <td><input type="number" class="form-control" [disabled]="disabled" [value]="item.quantity" (change)="update(item.product.id, $event)"></td>
+            <td>{{ item.import }}</td>
+            <th *ngIf="!disabled"><button class="btn btn-danger btn-sm" (click)="delete(item.product.id)">Borrar</button></th>
+        </tr>
+    </tbody>
+</table>

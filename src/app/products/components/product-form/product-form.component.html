@@ -1,0 +1,48 @@
+<form [formGroup]="myForm" (submit)="onSubmit()">
+    <div class="mb-3">
+        <label for="name" class="form-label">Nombre del Producto</label>
+        <input type="text" class="form-control"  name="name" id="name" formControlName="name">
+        <div *ngIf="isValidField('name')" class="form-text text-danger">
+            <p *ngIf="myForm.controls['name'].getError('required')">El nombre del producto es obligatorio</p>
+            <p *ngIf="myForm.controls['name'].getError('minlength')">El nombre del producto debe tener mas de 3 caracteres</p>
+            <p *ngIf="myForm.controls['name'].getError('maxlength')">El nombre del producto debe tener menos de 25 caracteres</p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Descripción</label>
+        <input type="description" class="form-control"  name="description" id="description" formControlName="description">
+        <div *ngIf="isValidField('description')" class="form-text text-danger">
+            <p *ngIf="myForm.controls['description'].getError('required')">La descripción es obligatoria</p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="sku" class="form-label">Sku</label>
+        <input type="text" class="form-control" name="sku" id="sku" formControlName="sku">
+        <div *ngIf="isValidField('sku')" class="form-text text-danger">
+            <p *ngIf="myForm.controls['sku'].getError('required')">El sku es obligatorio</p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Precio</label>
+        <input type="number" class="form-control" name="price" id="price" formControlName="price">
+        <div *ngIf="isValidField('price')" class="form-text text-danger">
+            <p *ngIf="myForm.controls['price'].getError('required')">El precio es obligatorio</p>
+            <p *ngIf="myForm.controls['price'].getError('min')">El precio debe ser un número positivo</p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="stock" class="form-label">Stock</label>
+        <input type="number" class="form-control" name="stock" id="stock" formControlName="stock">
+        <div *ngIf="isValidField('stock')" class="form-text text-danger">
+            <p *ngIf="myForm.controls['stock'].getError('required')">El stock es obligatorio</p>
+            <p *ngIf="myForm.controls['stock'].getError('min')">El stock debe ser un número positivo</p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-primary bg-gradient">Agregar producto</button>    
+    </div>
+</form>
+
+<pre>
+    <p>{{ myForm.value | json }}</p>
+</pre>

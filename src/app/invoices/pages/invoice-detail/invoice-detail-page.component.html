@@ -1,0 +1,31 @@
+<h2 class="my-3">{{ title }}</h2>
+<div class="card" *ngIf="invoice">
+    <div class="card-header">{{ title }}</div>
+    <div class="card-body">
+        <h5 class="card-title">Factura N°{{ invoice.id }}</h5>
+        <ul class="list-group my-3">
+            <li class="list-group-item list-group-item-primary">Datos del cliente</li>
+            <li class="list-group-item">Nombre: {{ invoice.client.name + ' ' + invoice.client.lastname }}</li>
+            <li class="list-group-item">Email: {{ invoice.client.email }}</li>
+            <li class="list-group-item">Teléfono: {{ invoice.client.phone }}</li>
+        </ul>
+        <ul class="list-group my-3">
+            <li class="list-group-item list-group-item-success">Datos de la factura</li>
+            <li class="list-group-item">Folio: {{ invoice.id }}</li>
+            <li *ngIf="invoice.description" class="list-group-item">Descripcíon: {{ invoice.description }}</li>
+            <li class="list-group-item">Fecha: {{ invoice.createdAt | date:'dd-MMM-yyyy'}}</li>
+        </ul>
+        <h5>Productos de la factura</h5>
+        <hr>
+        <table-products [items]="invoice.items" [disabled]="true"></table-products>
+        <h5 class="my-3">Total: <span class="badge bg-primary">{{ invoice.total }}</span></h5>
+
+        <div class="card  mb-4">
+            <div class="card-header bg-warning bg-opacity-50">Observaciones</div>
+            <div class="card-body">
+                <p *ngIf="!invoice.observation">No hay observaciones</p>
+                <p *ngIf="invoice.observation">{{ invoice.observation }}</p>
+            </div>
+        </div>
+    </div>
+</div>

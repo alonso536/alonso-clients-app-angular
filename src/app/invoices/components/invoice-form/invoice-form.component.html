@@ -1,0 +1,36 @@
+<form #invoiceForm="ngForm">
+    <div class="mb-3">
+        <label for="client" class="form-label">Cliente</label>
+        <input type="text" class="form-control" [(ngModel)]="invoice.client.name + ' ' + invoice.client.lastname" name="client" id="client" disabled>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Descripción</label>
+        <input type="text" class="form-control" [(ngModel)]="invoice.description" name="description" id="description" #description="ngModel">
+    </div>
+    <div class="mb-3">
+        <label for="observation" class="form-label">Observación</label>
+        <textarea class="form-control" [(ngModel)]="invoice.observation" name="description" id="description" #description="ngModel"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="items" class="form-label">Buscar producto</label>
+        <input type="text" name="items" class="form-control" [formControl]="searchInput" (input)="searchProducts()" [matAutocomplete]="auto">
+    </div>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectedOption($event)">
+        <mat-option *ngFor="let product of products" [value]="product">
+            {{ product.name }}
+        </mat-option>
+        <mat-option *ngIf="products.length === 0 && searchInput.value && searchInput.value.length > 0" value="">
+            No se encontró nada con el término {{ searchInput.value }}
+        </mat-option>
+    </mat-autocomplete>
+    <table-products *ngIf="this.invoice.items.length > 0" [items]="this.invoice.items" (productUpdatedId)="updateItemByInput($event)" (productDeletedId)="deleteItem($event)"></table-products>
+    <h5 class="my-3">Total: <span class="badge bg-primary">{{ invoice.total }}</span></h5>
+    <div class="my-3 text-danger">
+        <p *ngIf="invoice.items.length == 0"><small>{{ errorMessage }}</small></p>
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-primary bg-gradient" (click)="store()" [disabled]="!invoiceForm.form.valid">Enviar</button>
+    </div>
+</form>
+
+<pre><p>{{ this.invoice | json}}</p></pre>
